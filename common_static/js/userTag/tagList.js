@@ -76,8 +76,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','quickSearch','comm
             //});
 
         },
-
-
         deleteTask:function(name){
             var _this = this;
             showloading(true);

@@ -146,12 +146,12 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 _this.setTableMessage();
             });
 
-            $("#exportbut").click(function(){
-                if(_this.data != null){
-                    window.open("/sentosa/transform/dataQuery/exportResult?id="+_this.data.id);
-                }
-
-            });
+            // $("#exportbut").click(function(){
+            //     if(_this.data != null){
+            //         window.open("/sentosa/transform/dataQuery/exportResult?id="+_this.data.id);
+            //     }
+            //
+            // });
 
             $("#stopSql").click(function(){
                 _this.stopSql();
@@ -208,29 +208,33 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
         },
 
         startSql: function (times) {
-            $("#stopSql").show();
+            // $("#stopSql").show();
             $("#logs").html("");
             $("#tableMessage").html("");
             var _this = this;
-            showloading(true);
+            // showloading(true);
+            var info = $("#sql").val();
+            console.log(info);
             $.ajax({
                 type: "post",
-                url: "/sentosa/transform/dataQuery/executeQuerySql",
+                url: "/dataManager/sql/execute",
                 data: {
-                    sql: $("#sql").val(),
-                    param: times
+                    sql: info,
+                    sa: info
+                    // param: times
                 },
                 success: function (result) {
-                    showloading(false);
-                    if (result && result.success) {
-                        _this.data = result.pairs.dataQuery;
-                        _this.searchSqlLog();
-                    } else {
-                        $.showModal({content: result.message});
-                    }
+                    // showloading(false);
+                    // if (result && result.success) {
+                    //     _this.data = result.pairs.dataQuery;
+                    //     _this.searchSqlLog();
+                    // } else {
+                    //     $.showModal({content: result.message});
+                    // }
+                    console.log("OK");
                 },
                 error: function (a, b, c) {
-                    showloading(false);
+                    // showloading(false);
                     alert(a.responseText);
                 }
             });
